@@ -1,4 +1,5 @@
 import 'package:dummyjson/app_color/app_color.dart';
+import 'package:dummyjson/screen/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainTabScreen extends StatefulWidget {
@@ -9,8 +10,6 @@ class MainTabScreen extends StatefulWidget {
 }
 
 class _MainTabScreenState extends State<MainTabScreen> {
-  // 검색어 컨트롤러
-  final TextEditingController _searchCtrl = TextEditingController();
 
   //화면 관리 변수
   int _currentIndex = 0;
@@ -21,7 +20,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
       body: IndexedStack(
           index: _currentIndex,
           children: [
-
+            HomeScreen(), //1. 홈 화면
           ]
       ),
 
@@ -45,9 +44,9 @@ class _MainTabScreenState extends State<MainTabScreen> {
 
 
         items: [
-          BottomNavigationBarItem(label: "홈", icon: Icon(Icons.home_outlined)),
-          BottomNavigationBarItem(label: "장바구니", icon: Icon(Icons.shopping_bag_outlined)),
-          BottomNavigationBarItem(label: "위시 리스트", icon: Icon(Icons.favorite_border_rounded)),
+          BottomNavigationBarItem(label: "홈", icon: Icon(Icons.home)),
+          BottomNavigationBarItem(label: "장바구니", icon: Icon(Icons.shopping_bag)),
+          BottomNavigationBarItem(label: "위시 리스트", icon: Icon(Icons.favorite)),
           BottomNavigationBarItem(label: "마이 페이지", icon: Icon(Icons.person)),
         ],
       ),
