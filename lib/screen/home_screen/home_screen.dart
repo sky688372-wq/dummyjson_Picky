@@ -1,0 +1,143 @@
+import 'package:dummyjson/app_function/app_function.dart';
+import 'package:dummyjson/provider/product_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // 검색어 컨트롤러
+  final TextEditingController _searchCtrl = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // 화면 진입 시 바로 상품 조회
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ProductProvider>().loadProducts();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // 0. 앱바
+      appBar: AppBar(
+        title: Text(
+          "Home",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        leading: Image.asset('assets/app_logo/app_logo.png', fit: BoxFit.cover),
+      ),
+
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              // 1. 검색 텍스트 필드
+              TextField(
+                controller: _searchCtrl,
+                onSubmitted: (value) {
+                  // todo 검색 시 리스트 변경하도록 해야함
+                  AppFunction.showBuilding(context);
+                },
+                decoration: InputDecoration(
+                  hintText: "어떤 상품을 찾고 계신가요?",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      AppFunction.showBuilding(context);
+                    },
+                    icon: const Icon(Icons.search),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey.withValues(alpha: 0.15),
+                ),
+              ),
+
+              const SizedBox(height: 12),
+
+              // todo 2. 카테고리 별로 볼 수 있도록 칩들 배치하기
+
+
+              // 3. 상품 목록
+              Expanded(
+                child: Consumer<ProductProvider>(
+                  builder: (context, productProvider, child) {
+                    if (productProvider.isLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    if (productProvider.errorMessage != null) {
+                      return Center(child: Text(productProvider.errorMessage!));
+                    }
+
+                    if (productProvider.products.isEmpty) {
+                      return const Center(child: Text('상품이 없습니다.'));
+                    }
+
+                    return GridView.builder(
+                      padding: const EdgeInsets.only(top: 8),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 12,
+                        childAspectRatio: 0.7,
+                      ),
+                      itemCount: productProvider.products.length,
+                      itemBuilder: (context, index) {
+                        final product = productProvider.products[index];
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                  product.thumbnail,
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                  const Icon(Icons.image_not_supported),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              product.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              '\$${product.price}',
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
