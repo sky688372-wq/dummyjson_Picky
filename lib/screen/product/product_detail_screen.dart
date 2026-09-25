@@ -289,8 +289,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     backgroundColor: AppColor.primary,
                   ),
                   onPressed: () {
-                    // todo 장바구니 담기 로직 (CartProvider)
-                    AppFunction.showBuilding(context);
+
                   },
                   child: Text(
                     "장바구니 담기",
