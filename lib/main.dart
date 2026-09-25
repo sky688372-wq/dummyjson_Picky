@@ -1,3 +1,4 @@
+import 'package:dummyjson/provider/product_provider.dart';
 import 'package:dummyjson/provider/userInfo_provider.dart';
 import 'package:dummyjson/screen/onboarding/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => UserinfoProvider()),
+        ChangeNotifierProvider(create: (context) => UserinfoProvider()),
+        ChangeNotifierProvider(create: (context) => ProductProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
