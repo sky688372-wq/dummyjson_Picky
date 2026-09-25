@@ -1,6 +1,7 @@
 import 'package:dummyjson/app_color/app_color.dart';
 import 'package:dummyjson/app_function/app_function.dart';
 import 'package:dummyjson/provider/userInfo_provider.dart';
+import 'package:dummyjson/screen/onboarding/find_password_screen.dart';
 import 'package:dummyjson/screen/onboarding/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -150,8 +151,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     //비밀번호 찾기 텍스트 버튼
                     TextButton(
                       onPressed: () {
-                        //todo 비밀번호 찾기 화면으로 넘어가는 로직 추가하기
-                        AppFunction.showBuilding(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FindPasswordScreen(),
+                          ),
+                        );
                       },
                       child: Text("비밀번호를 잊으셨나요?"),
                     ),
@@ -172,10 +177,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     onPressed: () async {
-                      final success = await context.read<UserinfoProvider>().tryLogin(
-                        _idCtrl.text.trim(),
-                        _passwordCtrl.text.trim(),
-                      );
+                      final success = await context
+                          .read<UserinfoProvider>()
+                          .tryLogin(
+                            _idCtrl.text.trim(),
+                            _passwordCtrl.text.trim(),
+                          );
 
                       if (!context.mounted) return;
 
@@ -184,17 +191,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       } else {
                         ScaffoldMessenger.of(context).clearSnackBars();
                         ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              behavior: SnackBarBehavior.floating,
-                              backgroundColor: AppColor.primary,
-                              content: Text(
-                                "아이디 또는 비밀번호가 일치하지 않습니다.",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white
-                                ),
+                          SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: AppColor.primary,
+                            content: Text(
+                              "아이디 또는 비밀번호가 일치하지 않습니다.",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
                               ),
-                            )
+                            ),
+                          ),
                         );
                       }
                     },
