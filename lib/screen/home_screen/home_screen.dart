@@ -17,9 +17,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // 화면 진입 시 바로 상품 조회
+    // 화면 진입 시 바로 상품/카테고리 조회
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProductProvider>().loadProducts();
+      context.read<ProductProvider>().loadCategories();
     });
   }
 
@@ -71,8 +72,52 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 12),
 
-              // todo 2. 카테고리 별로 볼 수 있도록 칩들 배치하기
+              // 2. 카테고리 칩 목록
+              Consumer<ProductProvider>(
+                builder: (context, productProvider, child) {
+                  if (productProvider.categories.isEmpty) {
+                    return const SizedBox.shrink();
+                  }
 
+                  return SizedBox(
+                    height: 40,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: productProvider.categories.length + 1, // "전체" 포함
+                      separatorBuilder: (_, __) => const SizedBox(width: 8),
+                      itemBuilder: (context, index) {
+                        // 첫 번째는 "전체" 칩
+                        if (index == 0) {
+                          final isSelected = productProvider.selectedCategory == null;
+                          return ChoiceChip(
+                            label: const Text('전체'),
+                            selected: isSelected,
+                            onSelected: (_) {
+                              context.read<ProductProvider>().loadProducts();
+                            },
+                          );
+                        }
+
+                        final category = productProvider.categories[index - 1];
+                        final isSelected =
+                            productProvider.selectedCategory == category.slug;
+
+                        return ChoiceChip(
+                          label: Text(category.name),
+                          selected: isSelected,
+                          onSelected: (_) {
+                            context
+                                .read<ProductProvider>()
+                                .loadProductsByCategory(category.slug);
+                          },
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+
+              const SizedBox(height: 12),
 
               // 3. 상품 목록
               Expanded(
