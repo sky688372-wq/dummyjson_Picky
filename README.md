@@ -1,17 +1,10 @@
-# dummyjson
+## 소개
+**[DummyJSON](https://dummyjson.com/)**을 활용한 쇼핑몰 앱 만들기 토이프로젝트
 
-A new Flutter project.
+목표 : "API를 연결한 앱을 만드는 것"에서 끝나는 것이 아니라, 외부 데이터를 기반으로 실제 사용자가 이용할 수 있는 하나의 인터페이스를 완성하는 것
 
-## Getting Started
+## Velog 
+  1. 앱 추상화 : https://velog.io/@han090213/DummyJSON-쇼핑-앱-기획-추상화
+  2. 인증 영역 화면 개발 : https://velog.io/@han090213/DummyJSON-실습2-인증-영역-화면-개발
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 화면 구성
