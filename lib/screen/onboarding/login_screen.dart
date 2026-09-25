@@ -1,6 +1,7 @@
 import 'package:dummyjson/app_color/app_color.dart';
 import 'package:dummyjson/app_function/app_function.dart';
 import 'package:dummyjson/provider/userInfo_provider.dart';
+import 'package:dummyjson/screen/main_tab_screen/main_tab_screen.dart';
 import 'package:dummyjson/screen/onboarding/find_password_screen.dart';
 import 'package:dummyjson/screen/onboarding/signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +18,16 @@ class _LoginScreenState extends State<LoginScreen> {
   //컨트롤러
   final TextEditingController _idCtrl = TextEditingController(); // 유저 아이디 컨트롤러
   final TextEditingController _passwordCtrl =
-      TextEditingController(); //유저 계정 비밀번호 컨틀홀러
+  TextEditingController(); //유저 계정 비밀번호 컨틀홀러
 
   //유저 로그인 유지 기능 상태 변수
   bool _keepLoggedIn = false;
 
   //비밀번호 보임/숨김 상태 변수
   bool _isPasswordShow = false;
+
+  //로그인 요청 중 상태 관리 변수
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +123,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Colors.grey,
                       ),
                     ),
-
                     hintText: "비밀번호를 입력해주세요.",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -176,18 +179,35 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    onPressed: () async {
+                    onPressed: _isLoading
+                        ? null // 로그인 요청 중 버튼 비활성화
+                        : () async {
+                      // 로그인 요청 시작
+                      setState(() {
+                        _isLoading = true;
+                      });
+
                       final success = await context
                           .read<UserinfoProvider>()
                           .tryLogin(
-                            _idCtrl.text.trim(),
-                            _passwordCtrl.text.trim(),
-                          );
+                        _idCtrl.text.trim(),
+                        _passwordCtrl.text.trim(),
+                      );
 
                       if (!context.mounted) return;
 
-                      if (success) {
-                        // TODO: 홈 화면으로 이동
+                      // 로그인 요청 종료
+                      setState(() {
+                        _isLoading = false;
+                      });
+
+                      if (success) { // 성공 시 다음 화면으로 이동
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MainTabScreen(),
+                          ),
+                        );
                       } else {
                         ScaffoldMessenger.of(context).clearSnackBars();
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -205,7 +225,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                       }
                     },
-                    child: Text(
+                    // 서버 응답을 기다리는 동안 중앙에 로딩 표시
+                    child: _isLoading
+                        ? const SizedBox(
+                      width: 25,
+                      height: 25,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 3,
+                      ),
+                    )
+                        : Text(
                       '로그인',
                       style: TextStyle(
                         fontSize: 20,
