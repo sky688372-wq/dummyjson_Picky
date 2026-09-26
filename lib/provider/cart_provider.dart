@@ -7,6 +7,24 @@ class CartProvider extends ChangeNotifier {
 
   // 카트에 추가하는 매서드
   void addToCart(BuildContext context, Product product) {
+    if(cartProducts.contains(product)) { //만일 카트에 이미 동일 상품이 존해한다면 종료
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: AppColor.primary,
+            behavior: SnackBarBehavior.floating,
+            content: Text(
+              "해당 상품은 이미 장바구니에 담겨져 있습니다.",
+              style: TextStyle(
+                  color: Colors.white
+              ),
+            ),
+          )
+      );
+      return;
+    }
+
+    //동일 상품이 없다면 추가하고 알림
     cartProducts.add(product);
     notifyListeners();
     ScaffoldMessenger.of(context).clearSnackBars();
