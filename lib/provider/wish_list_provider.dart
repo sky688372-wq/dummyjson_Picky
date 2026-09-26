@@ -31,7 +31,7 @@ class WishListProvider extends ChangeNotifier {
             backgroundColor: AppColor.primary,
             behavior: SnackBarBehavior.floating,
             content: Text(
-              "해당 상품은 이미 장바구니에 담겨져 있습니다.",
+              "해당 상품을 위시 리스트로 담았습니다.",
               style: TextStyle(
                   color: Colors.white
               ),
@@ -52,7 +52,7 @@ class WishListProvider extends ChangeNotifier {
           backgroundColor: AppColor.primary,
           behavior: SnackBarBehavior.floating,
           content: Text(
-            "해당 상품은 이미 장바구니에 담겨져 있습니다.",
+            "위시리스트에서 삭제되었습니다.",
             style: TextStyle(
                 color: Colors.white
             ),

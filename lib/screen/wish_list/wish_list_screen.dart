@@ -102,7 +102,13 @@ class _WishListScreenState extends State<WishListScreen> {
 
                           return GestureDetector(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailScreen(product: product)));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ProductDetailScreen(product: product),
+                                ),
+                              );
                             },
 
                             child: Container(
@@ -151,10 +157,11 @@ class _WishListScreenState extends State<WishListScreen> {
                                           right: 8,
                                           child: GestureDetector(
                                             onTap: () {
-                                              wishListProvider.removeFromWishList(
-                                                context,
-                                                product,
-                                              );
+                                              wishListProvider
+                                                  .removeFromWishList(
+                                                    context,
+                                                    product,
+                                                  );
                                             },
                                             child: Container(
                                               width: 34,
@@ -165,7 +172,9 @@ class _WishListScreenState extends State<WishListScreen> {
                                                 boxShadow: [
                                                   BoxShadow(
                                                     color: Colors.black
-                                                        .withValues(alpha: 0.08),
+                                                        .withValues(
+                                                          alpha: 0.08,
+                                                        ),
                                                     blurRadius: 6,
                                                   ),
                                                 ],
@@ -230,31 +239,83 @@ class _WishListScreenState extends State<WishListScreen> {
                                           ],
                                         ),
                                         const SizedBox(height: 10),
-                                        SizedBox(
-                                          width: double.infinity,
-                                          height: 34,
-                                          child: OutlinedButton(
-                                            onPressed: () {
-                                              context
-                                                  .read<CartProvider>()
-                                                  .addToCart(context, product);
-                                            },
-                                            style: OutlinedButton.styleFrom(
-                                              foregroundColor: AppColor.primary,
-                                              side: const BorderSide(
-                                                color: AppColor.primary,
+
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            bottom: 4,
+                                          ),
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            height: 34,
+                                            child: OutlinedButton(
+                                              onPressed: () {
+                                                context
+                                                    .read<CartProvider>()
+                                                    .addToCart(
+                                                      context,
+                                                      product,
+                                                    );
+                                              },
+                                              style: OutlinedButton.styleFrom(
+                                                foregroundColor:
+                                                    AppColor.primary,
+                                                side: const BorderSide(
+                                                  color: AppColor.primary,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                                padding: EdgeInsets.zero,
                                               ),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
+                                              child: const Text(
+                                                '장바구니에 담기',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
-                                              padding: EdgeInsets.zero,
                                             ),
-                                            child: const Text(
-                                              '장바구니 담기',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                            bottom: 4,
+                                          ),
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            height: 34,
+                                            child: OutlinedButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  context
+                                                      .read<WishListProvider>()
+                                                      .removeFromWishList(
+                                                        context,
+                                                        product,
+                                                      );
+                                                });
+                                              },
+                                              style: OutlinedButton.styleFrom(
+                                                foregroundColor:
+                                                    AppColor.primary,
+                                                side: const BorderSide(
+                                                  color: Colors.red,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                                padding: EdgeInsets.zero,
+                                              ),
+                                              child: const Text(
+                                                '위시리스트에서 삭제',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.red,
+                                                ),
                                               ),
                                             ),
                                           ),

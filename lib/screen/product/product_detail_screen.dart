@@ -19,6 +19,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final product = widget.product;
+    bool isFavorite = context.watch<WishListProvider>().wishListProducts.contains(widget.product);
 
     // 할인가 계산
     final discountedPrice =
@@ -279,9 +280,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             children: [
               IconButton(
                 onPressed: () {
-                  context.read<WishListProvider>().addToWishList(context, product);
+                  setState(() {
+                    context.read<WishListProvider>().addToWishList(context, product);
+                  });
                 },
-                icon: Icon(Icons.favorite_border),
+                icon: Icon(
+                    isFavorite? Icons.favorite : Icons.favorite_border,
+                  color: isFavorite? AppColor.primary : Colors.grey
+                ),
               ),
               const SizedBox(width: 8),
               Expanded(
