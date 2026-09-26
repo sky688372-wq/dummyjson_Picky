@@ -94,7 +94,7 @@ class _WishListScreenState extends State<WishListScreen> {
                               crossAxisCount: 2,
                               crossAxisSpacing: 12,
                               mainAxisSpacing: 16,
-                              childAspectRatio: 0.62,
+                              childAspectRatio: 0.55,
                             ),
                         itemCount: products.length,
                         itemBuilder: (context, index) {
@@ -155,35 +155,24 @@ class _WishListScreenState extends State<WishListScreen> {
                                         Positioned(
                                           top: 8,
                                           right: 8,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              wishListProvider
-                                                  .removeFromWishList(
-                                                    context,
-                                                    product,
-                                                  );
-                                            },
-                                            child: Container(
-                                              width: 34,
-                                              height: 34,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                shape: BoxShape.circle,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black
-                                                        .withValues(
-                                                          alpha: 0.08,
-                                                        ),
-                                                    blurRadius: 6,
-                                                  ),
-                                                ],
-                                              ),
-                                              child: const Icon(
-                                                Icons.favorite,
-                                                size: 19,
-                                                color: AppColor.primary,
-                                              ),
+                                          child: Container(
+                                            width: 34,
+                                            height: 34,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black
+                                                      .withValues(alpha: 0.08),
+                                                  blurRadius: 6,
+                                                ),
+                                              ],
+                                            ),
+                                            child: const Icon(
+                                              Icons.favorite,
+                                              size: 19,
+                                              color: AppColor.primary,
                                             ),
                                           ),
                                         ),
@@ -238,11 +227,11 @@ class _WishListScreenState extends State<WishListScreen> {
                                             ),
                                           ],
                                         ),
-                                        const SizedBox(height: 10),
+                                        const SizedBox(height: 5),
 
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                            bottom: 4,
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 4,
                                           ),
                                           child: SizedBox(
                                             width: double.infinity,
@@ -280,8 +269,8 @@ class _WishListScreenState extends State<WishListScreen> {
                                         ),
 
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                            bottom: 4,
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 4,
                                           ),
                                           child: SizedBox(
                                             width: double.infinity,
