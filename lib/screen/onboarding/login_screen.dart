@@ -28,6 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   //로그인 요청 중 상태 관리 변수
   bool _isLoading = false;
+  
+  // 스플래쉬 화면 만들어서 그곳에서 로그인 화면으로 갈지 메인 화면으로 갈지 처리하면 좋을 듯함
 
   @override
   Widget build(BuildContext context) {
@@ -190,6 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       final success = await context
                           .read<UserinfoProvider>()
                           .tryLogin(
+                        _keepLoggedIn,
                         _idCtrl.text.trim(),
                         _passwordCtrl.text.trim(),
                       );

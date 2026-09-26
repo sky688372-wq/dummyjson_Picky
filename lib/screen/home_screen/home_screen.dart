@@ -84,12 +84,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 40,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: productProvider.categories.length + 1, // "전체" 포함
+                      itemCount: productProvider.categories.length + 1,
+                      // "전체" 포함
                       separatorBuilder: (_, __) => const SizedBox(width: 8),
                       itemBuilder: (context, index) {
                         // 첫 번째는 "전체" 칩
                         if (index == 0) {
-                          final isSelected = productProvider.selectedCategory == null;
+                          final isSelected =
+                              productProvider.selectedCategory == null;
                           return ChoiceChip(
                             label: const Text('전체'),
                             selected: isSelected,
@@ -138,31 +140,41 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     return GridView.builder(
                       padding: const EdgeInsets.only(top: 8),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 12,
-                        childAspectRatio: 0.7,
-                      ),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 12,
+                            crossAxisSpacing: 12,
+                            childAspectRatio: 0.7,
+                          ),
                       itemCount: productProvider.products.length,
                       itemBuilder: (context, index) {
                         final product = productProvider.products[index];
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailScreen(product: product)));
-                              },
-                              child: Expanded(
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ProductDetailScreen(product: product),
+                                    ),
+                                  );
+                                },
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: Image.network(
                                     product.thumbnail,
                                     fit: BoxFit.cover,
                                     width: double.infinity,
-                                    errorBuilder: (context, error, stackTrace) =>
-                                    const Icon(Icons.image_not_supported),
+                                    errorBuilder:
+                                        (context, error, stackTrace) =>
+                                            const Icon(
+                                              Icons.image_not_supported,
+                                            ),
                                   ),
                                 ),
                               ),
@@ -172,11 +184,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               product.title,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(fontWeight: FontWeight.w600),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                             Text(
                               '\$${product.price}',
-                              style: const TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         );
