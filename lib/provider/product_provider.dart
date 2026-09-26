@@ -86,4 +86,30 @@ class ProductProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  //상품 검색 함수
+  Future<void> searchProduct(String searchText) async {
+    _isLoading = true;
+    notifyListeners();
+    final url = Uri.parse('https://dummyjson.com/products/search?q=$searchText');
+
+    try {
+      final response = await http.get(url);
+
+      if(response.statusCode == 200) {
+        final productResponse = ProductResponse.fromJson(jsonDecode(response.body));
+        _products = productResponse.products;
+        _errorMessage = null;
+
+      } else {
+        _errorMessage = '상품을 불러오지 못했습니다. (${response.statusCode})';
+      }
+    } catch(e) {
+      _errorMessage = '통신 실패: $e';
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
 }

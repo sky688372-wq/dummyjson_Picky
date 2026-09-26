@@ -1,5 +1,3 @@
-import 'package:dummyjson/app_color/app_color.dart';
-import 'package:dummyjson/app_function/app_function.dart';
 import 'package:dummyjson/provider/product_provider.dart';
 import 'package:dummyjson/screen/product/product_detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -52,8 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
               TextField(
                 controller: _searchCtrl,
                 onSubmitted: (value) {
-                  // todo 검색 시 리스트 변경하도록 해야함
-                  AppFunction.showBuilding(context);
+                  context.read<ProductProvider>().searchProduct(_searchCtrl.text);
                 },
                 decoration: InputDecoration(
                   hintText: "어떤 상품을 찾고 계신가요?",
@@ -63,7 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   suffixIcon: IconButton(
                     onPressed: () {
-                      AppFunction.showBuilding(context);
+                      // 통신 정상 확인함
+                      context.read<ProductProvider>().searchProduct(_searchCtrl.text);
                     },
                     icon: const Icon(Icons.search),
                   ),
