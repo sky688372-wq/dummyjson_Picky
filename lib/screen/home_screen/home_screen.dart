@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 12),
 
               // 2. 카테고리 칩 목록
-              Consumer<ProductProvider>(
+              Consumer<ProductProvider>( //컨슈머로 바로바로 바뀌자마자 리빌드 가능하도록
                 builder: (context, productProvider, child) {
                   if (productProvider.categories.isEmpty) {
                     return const SizedBox.shrink();

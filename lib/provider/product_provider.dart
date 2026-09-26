@@ -90,7 +90,7 @@ class ProductProvider extends ChangeNotifier {
   //상품 검색 함수
   Future<void> searchProduct(String searchText) async {
     _isLoading = true;
-    notifyListeners();
+    notifyListeners(); //이거 안해서 오류 계속 찾았다.....
     final url = Uri.parse('https://dummyjson.com/products/search?q=$searchText');
 
     try {
