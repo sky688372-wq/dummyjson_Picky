@@ -34,7 +34,7 @@ class CartProvider extends ChangeNotifier {
           backgroundColor: AppColor.primary,
           behavior: SnackBarBehavior.floating,
           content: Text(
-            "장바구니에 담겼습니다.",
+            "장바구니에서 삭제되었습니다.",
             style: TextStyle(
                 color: Colors.white
             ),
