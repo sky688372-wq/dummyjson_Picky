@@ -1,7 +1,9 @@
 import 'package:dummyjson/app_color/app_color.dart';
 import 'package:dummyjson/app_function/app_function.dart';
 import 'package:dummyjson/model_class/product.dart';
+import 'package:dummyjson/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key, required this.product});
@@ -289,10 +291,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     backgroundColor: AppColor.primary,
                   ),
                   onPressed: () {
-
+                    context.read<CartProvider>().addToCart(context, widget.product);
                   },
                   child: Text(
-                    "장바구니 담기",
+                    "장바구니에 담기",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
