@@ -2,6 +2,7 @@ import 'package:dummyjson/app_color/app_color.dart';
 import 'package:dummyjson/app_function/app_function.dart';
 import 'package:dummyjson/model_class/product.dart';
 import 'package:dummyjson/provider/cart_provider.dart';
+import 'package:dummyjson/provider/wish_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -278,8 +279,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             children: [
               IconButton(
                 onPressed: () {
-                  // todo 찜하기 로직 (WishlistProvider)
-                  AppFunction.showBuilding(context);
+                  context.read<WishListProvider>().addToWishList(context, product);
                 },
                 icon: Icon(Icons.favorite_border),
               ),
