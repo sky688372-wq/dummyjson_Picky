@@ -1,3 +1,4 @@
+import 'package:dummyjson/app_color/app_color.dart';
 import 'package:dummyjson/app_function/app_function.dart';
 import 'package:dummyjson/provider/product_provider.dart';
 import 'package:dummyjson/screen/product/product_detail_screen.dart';

@@ -2,6 +2,7 @@ import 'package:dummyjson/app_color/app_color.dart';
 import 'package:dummyjson/screen/cart/cart_screen.dart';
 import 'package:dummyjson/screen/home_screen/home_screen.dart';
 import 'package:dummyjson/screen/my_page/my_page.dart';
+import 'package:dummyjson/screen/wish_list/wish_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainTabScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
         children: [
           HomeScreen(),                                           // 0. 홈 화면
           CartScreen(),                                           // 1. 장바구니 화면
-          Center(child: Text('위시리스트 화면 준비 중')),             // 2. 위시리스트 화면
+          WishListScreen(),                                       // 2. 위시리스트 화면
           MyPage()                                                // 3. 마이페이지 화면
         ],
       ),
