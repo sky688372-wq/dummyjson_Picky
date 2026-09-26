@@ -1,5 +1,6 @@
 import 'package:dummyjson/app_color/app_color.dart';
 import 'package:dummyjson/provider/userInfo_provider.dart';
+import 'package:dummyjson/screen/main_tab_screen/main_tab_screen.dart';
 import 'package:dummyjson/screen/onboarding/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -50,6 +51,11 @@ class _SplashScreenState extends State<SplashScreen>
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const LoginScreen()),
+      );
+    } else if (success && mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MainTabScreen()),
       );
     }
   }
