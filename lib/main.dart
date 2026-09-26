@@ -1,11 +1,11 @@
 import 'package:dummyjson/provider/cart_provider.dart';
 import 'package:dummyjson/provider/product_provider.dart';
 import 'package:dummyjson/provider/userInfo_provider.dart';
+import 'package:dummyjson/provider/wish_list_provider.dart';
 import 'package:dummyjson/screen/onboarding/login_screen.dart';
 import 'package:dummyjson/screen/onboarding/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => UserinfoProvider()),
         ChangeNotifierProvider(create: (context) => ProductProvider()),
-        ChangeNotifierProvider(create: (context) => CartProvider())
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(create: (context) => WishListProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
