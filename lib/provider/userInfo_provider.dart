@@ -1,4 +1,3 @@
-import 'package:dummyjson/screen/home_screen/home_screen.dart';
 import 'package:dummyjson/screen/onboarding/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -86,6 +85,8 @@ class UserinfoProvider extends ChangeNotifier {
     gender = '';
     profileImg = '';
 
+    notifyListeners();
+
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => LoginScreen()),
@@ -94,28 +95,28 @@ class UserinfoProvider extends ChangeNotifier {
 
   //로컬에 저장된 값들이 있다면 바로 메인 화면으로 이동시키기
   Future<bool> tryAutoLogin() async {
-    print('A. tryAutoLogin 시작');
+    // print('A. tryAutoLogin 시작');
 
     final storage = FlutterSecureStorage();
     final savedToken = await storage.read(key: 'accessToken');
 
-    print('B. 저장된 accessToken 존재 여부: ${savedToken != null}');
+    // print('B. 저장된 accessToken 존재 여부: ${savedToken != null}');
 
     if (savedToken == null) {
-      print('C. 저장된 토큰 없음');
+      // print('C. 저장된 토큰 없음');
       return false; // 저장된 토큰 없음 -> 로그인 화면으로
     }
 
     try {
-      print('C. /auth/me API 요청 시작');
+      // print('C. /auth/me API 요청 시작');
 
       final response = await http.get(
         Uri.parse('https://dummyjson.com/auth/me'),
         headers: {'Authorization': 'Bearer $savedToken'},
       );
 
-      print('D. /auth/me 응답 코드: ${response.statusCode}');
-      print('E. /auth/me 응답 완료');
+      // print('D. /auth/me 응답 코드: ${response.statusCode}');
+      // print('E. /auth/me 응답 완료');
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -132,17 +133,17 @@ class UserinfoProvider extends ChangeNotifier {
 
         notifyListeners();
 
-        print('F. 사용자 정보 저장 완료');
-        print('G. 로그인 성공');
+        // print('F. 사용자 정보 저장 완료');
+        // print('G. 로그인 성공');
         return true; // 자동 로그인 성공
       } else {
-        print('F. 로그인 실패 - 응답 코드: ${response.statusCode}');
+        // print('F. 로그인 실패 - 응답 코드: ${response.statusCode}');
 
         // 토큰이 만료됐거나 무효함 → 로컬 저장값도 삭제
         await storage.delete(key: 'accessToken');
         await storage.delete(key: 'refreshToken');
 
-        print('G. 저장된 토큰 삭제 완료');
+        // print('G. 저장된 토큰 삭제 완료');
         return false;
       }
     } catch (e) {
