@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               // 1. 검색 텍스트 필드
               TextField(
+                keyboardType: TextInputType.text,
                 controller: _searchCtrl,
                 onSubmitted: (value) {
                   context.read<ProductProvider>().searchProduct(_searchCtrl.text);
