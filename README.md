@@ -6,5 +6,5 @@
 ## Velog 
   1. 앱 추상화 : https://velog.io/@han090213/DummyJSON-쇼핑-앱-기획-추상화
   2. 인증 영역 화면 개발 : https://velog.io/@han090213/DummyJSON-실습2-인증-영역-화면-개발
-
+  3. DummyJSON 실습3 : 홈 화면 개발 : https://velog.io/@han090213/DummyJSON-실습2-홈-화면-개발
 ## 화면 구성
