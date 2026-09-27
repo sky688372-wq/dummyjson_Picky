@@ -9,8 +9,23 @@ class AppInfoScreen extends StatefulWidget {
 }
 
 class _AppInfoScreenState extends State<AppInfoScreen> {
-  // Velog 링크 열기
+
+
+  // Velog 링크 열기 : 개발 과정
   Future<void> _launchVelog() async {
+    final Uri url = Uri.parse('https://velog.io/@han090213/posts');
+
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('링크를 열 수 없습니다.')));
+      }
+    }
+  }
+
+  // Velog 링크 열기 : 개발 과정
+  Future<void> _launchDevelopmentProcess() async {
     final Uri url = Uri.parse('https://velog.io/@han090213/DummyJSON-%EC%87%BC%ED%95%91-%EC%95%B1-%EA%B8%B0%ED%9A%8D-%EC%B6%94%EC%83%81%ED%99%94');
 
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
@@ -123,7 +138,7 @@ class _AppInfoScreenState extends State<AppInfoScreen> {
                 icon: Icons.article_outlined,
                 title: "개발 과정",
                 subtitle: "Velog에서 개발 과정 보기",
-                onTap: _launchVelog,
+                onTap: _launchDevelopmentProcess,
               ),
 
               //사용한 API 더미 제이슨 사이트로 이동
