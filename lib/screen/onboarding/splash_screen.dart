@@ -21,6 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+
     // 로고 애니메이션 설정
     _animationController = AnimationController(
       vsync: this,
@@ -32,30 +33,52 @@ class _SplashScreenState extends State<SplashScreen>
       curve: Curves.easeIn,
     );
 
-    _slideAnimation =
-        Tween<Offset>(begin: const Offset(0, 0.15), end: Offset.zero).animate(
-          CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
-        );
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.15),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOut,
+      ),
+    );
 
-    _animationController.forward();
+    _startSplash();
+  }
 
-    // 오토 로그인 기능 여기서 사용해서 메인 화면으로 이동할지 아닐지 판단하기
-    _checkAutoLogin();
+  // 애니메이션이 끝난 후 자동 로그인 확인
+  Future<void> _startSplash() async {
+    // 애니메이션이 끝날 때까지 기다리고
+    await _animationController.forward();
+
+    if (!mounted) return;
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    // 애니메이션 종료 후 자동 로그인 확인
+    await _checkAutoLogin();
   }
 
   // 자동 로그인 결과에 따라 화면 이동
   Future<void> _checkAutoLogin() async {
-    final success = await context.read<UserinfoProvider>().tryAutoLogin();
+    final success =
+    await context.read<UserinfoProvider>().tryAutoLogin();
 
-    if (!success && mounted) {
+    if (!mounted) return;
+
+    if (success) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        MaterialPageRoute(
+          builder: (context) => MainTabScreen(),
+        ),
       );
-    } else if (success && mounted) {
+    } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => MainTabScreen()),
+        MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        ),
       );
     }
   }
@@ -95,7 +118,10 @@ class _SplashScreenState extends State<SplashScreen>
                 const SizedBox(height: 8),
                 const Text(
                   '안목 있는 당신을 위한 큐레이션',
-                  style: TextStyle(fontSize: 15, color: Colors.grey),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.grey,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 const SizedBox(
