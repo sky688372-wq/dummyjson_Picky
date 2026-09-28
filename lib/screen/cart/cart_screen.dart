@@ -1,3 +1,4 @@
+import 'package:dummyjson/app_color/app_color.dart';
 import 'package:dummyjson/model_class/product.dart';
 import 'package:dummyjson/provider/cart_provider.dart';
 import 'package:dummyjson/screen/product/product_detail_screen.dart';
@@ -34,10 +35,43 @@ class _CartScreenState extends State<CartScreen> {
 
             // 장바구니가 비어있을 때
             if (cartProducts.isEmpty) {
-              return const Center(
-                child: Text(
-                  "장바구니가 비어있습니다.",
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: AppColor.tertiary,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.shopping_bag_outlined,
+                        size: 40,
+                        color: AppColor.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      '아직 장바구니에 상품이 없어요',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColor.secondary,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      '마음에 드는 상품을\n장바구니에 담아보세요.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        height: 1.5,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
                 ),
               );
             }
