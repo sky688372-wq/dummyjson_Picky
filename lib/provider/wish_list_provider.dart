@@ -24,6 +24,7 @@ class WishListProvider extends ChangeNotifier {
       return;
     } else { //위시 리스트에 없다면
       wishListProducts.add(product);
+      notifyListeners();
 
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
@@ -46,6 +47,7 @@ class WishListProvider extends ChangeNotifier {
   //위시리스트 삭제 매서드
   void removeFromWishList(BuildContext context ,Product product) {
     wishListProducts.remove(product);
+    notifyListeners();
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
