@@ -4,9 +4,10 @@
 목표 : "API를 연결한 앱을 만드는 것"에서 끝나는 것이 아니라, 외부 데이터를 기반으로 실제 사용자가 이용할 수 있는 하나의 인터페이스를 완성하는 것
 
 ## Velog 
-  1. 앱 추상화 : https://velog.io/@han090213/DummyJSON-쇼핑-앱-기획-추상화
-  2. 인증 영역 화면 개발 : https://velog.io/@han090213/DummyJSON-실습2-인증-영역-화면-개발
-  3. DummyJSON 실습3 : 홈 화면 개발 : https://velog.io/@han090213/DummyJSON-실습2-홈-화면-개발
+  1. DummyJSON 실습1 쇼핑 앱 추상화 : https://velog.io/@han090213/DummyJSON-쇼핑-앱-기획-추상화
+  2. DummyJSON 실습2 인증 영역 화면 개발 : https://velog.io/@han090213/DummyJSON-실습2-인증-영역-화면-개발
+  3. DummyJSON 실습3 홈 화면 개발 : https://velog.io/@han090213/DummyJSON-실습2-홈-화면-개발
+  4. DummyJSON 실습4 장바구니 및 위시리스트 화면 개발 : https://velog.io/@han090213/DummyJSON-실습4-장바구니-및-위시리스트-화면-개발 
 
 ## 사용 패키지
 - [url_launcher](https://pub.dev/packages/url_launcher)
