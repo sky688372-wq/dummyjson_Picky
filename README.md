@@ -41,7 +41,8 @@
 ### 3. 장바구니 화면
 
 #### (1) 장바구니에 담긴 제품이 없을 경우
-<img width="303" height="618" alt="image" src="https://github.com/user-attachments/assets/d4116e68-c965-44c6-988a-e72a9d304e37" />
+<img width="303" height="618" alt="image" src="https://github.com/user-attachments/assets/bf75748c-98e4-4dbe-81cf-ed9a31771bc5" />
+
 
 #### (2) 장바구니에 담긴 제품 존재 시
 <img width="303" height="618" alt="image" src="https://github.com/user-attachments/assets/112dbcd9-eb6b-4831-9841-775dd019baff" />
@@ -50,7 +51,8 @@
 ### 4,  위시리스트 화면
 
 #### (1) 위시리스트가 비어있을 경우
-<img width="303" height="618" alt="image" src="https://github.com/user-attachments/assets/c47aa523-e9d5-49dc-9a3d-fe95db008f01" />
+<img width="303" height="618" alt="image" src="https://github.com/user-attachments/assets/10620133-ddf5-478e-ae2b-098d1020fc5f" />
+
 
 #### (2) 위시리스트 존재 시
 <img width="303" height="618" alt="image" src="https://github.com/user-attachments/assets/be88a10f-9c03-430e-8ed0-123f42ee8d21" />
